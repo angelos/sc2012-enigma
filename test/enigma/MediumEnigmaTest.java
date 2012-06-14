@@ -19,14 +19,14 @@ public class MediumEnigmaTest {
 	
 	@Before
 	public void setup() {
-		rotor1 = new Rotor("DCAB", "C");
-		rotor2 = new Rotor("DCAB", "C");
+		rotor1 = new Rotor("DCAB", 'C');
+		rotor2 = new Rotor("DCAB", 'C');
 		reflector = new Reflector("ABAB");
 	}
 
 	@Test
 	public void encodesAToC() {
-		assertEquals("C", encode("A"));
+		assertEquals(2, encode(0));
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class MediumEnigmaTest {
 		assertEquals("C", enigma.encode("A"));
 	}
 
-	private String encode(String input) {
-		String val = input;
+	private int encode(int input) {
+		int val = input;
 		val = rotor2.left(val);
 		val = rotor1.left(val);
 		val = reflector.reflect(val);

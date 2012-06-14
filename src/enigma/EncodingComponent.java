@@ -7,11 +7,11 @@ public abstract class EncodingComponent {
 		return "" + ALPHABET.charAt(index);
 	}
 	
-	protected int ordinal(String letter) {
+	protected int ordinal(char letter) {
 		return ALPHABET.indexOf(letter);
 	}
 
-	protected int otherIndexOf(String character, String input, int notThisIndex) {
+	protected int otherIndexOf(char character, String input, int notThisIndex) {
 		int match = input.indexOf(character);
 		if (match == notThisIndex) {
 			match = input.indexOf(character, notThisIndex + 1);

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Enigma {
+	private final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	private final Reflector reflector;
 	private final List<Rotor> rightwayRotors;
@@ -26,9 +27,9 @@ public class Enigma {
 		return sb.toString();
 	}
 
-	private String encode(char c) {
+	private char encode(char c) {
 		shift();
-		String val = "" + c;
+		int val = ordinal(c);
 		for (Rotor r : leftwayRotors) {
 			val = r.left(val);
 		}
@@ -37,7 +38,7 @@ public class Enigma {
 			val = r.right(val);
 		}
 		
-		return val;
+		return letter(val);
 	}
 
 	private void shift() {
@@ -55,6 +56,13 @@ public class Enigma {
 		rotor.shift();
 	}
 	
+	protected char letter(int index) {
+		return ALPHABET.charAt(index);
+	}
 	
+	protected int ordinal(char letter) {
+		return ALPHABET.indexOf(letter);
+	}
+
 
 }

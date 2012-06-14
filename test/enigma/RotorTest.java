@@ -10,35 +10,35 @@ public class RotorTest {
 	
 	@Before
 	public void setup() {
-		rotor = new Rotor("DCAB", "C");
+		rotor = new Rotor("DCAB", 'C');
 	}
 	
 	@Test
 	public void goingLeftAShouldEncodeToD() {
-		assertEquals("D", rotor.left("A"));
+		assertEquals(3, rotor.left(0));
 	}
 
 	@Test
 	public void goingRightBShouldEncodeToD() {
-		assertEquals("D", rotor.right("B"));
+		assertEquals(3, rotor.right(1));
 	}
 	
 	@Test
 	public void afterShiftingGoingLeftAShouldEncodeToB() {
 		rotor.shift();
-		assertEquals("B", rotor.left("A"));
+		assertEquals(1, rotor.left(0));
 	}
 
 	@Test
 	public void afterShiftingGoingRightAShouldEncodeToC() {
 		rotor.shift();
-		assertEquals("C", rotor.right("A"));
+		assertEquals(2, rotor.right(0));
 	}
 
 	@Test
 	public void afterSettingToBGoingRightAShouldEncodeToC() {
-		rotor.set("B");
-		assertEquals("C", rotor.right("A"));
+		rotor.set('B');
+		assertEquals(2, rotor.right(0));
 	}
 	
 	@Test

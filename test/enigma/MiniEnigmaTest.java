@@ -3,7 +3,6 @@ package enigma;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -20,27 +19,27 @@ public class MiniEnigmaTest {
 	
 	@Before
 	public void setup() {
-		rotor = new Rotor("DCAB", "C");
+		rotor = new Rotor("DCAB", 'C');
 		reflector = new Reflector("ABAB");
 	}
 
 	@Test
 	public void firstStepEncodesAToD() {
-		assertEquals("D", encode("A"));
+		assertEquals(3, encode(0));
 	}
 	
 	@Test
 	public void afterShiftEncodesAToB() {
 		rotor.shift();
-		assertEquals("B", encode("A"));
+		assertEquals(1, encode(0));
 	}
 	
 	@Test
 	public void encodesAToBAndAToD() {
 		rotor.shift();
-		assertEquals("B", encode("A"));
+		assertEquals(1, encode(0));
 		rotor.shift();
-		assertEquals("D", encode("A"));
+		assertEquals(3, encode(0));
 	}
 
 	@Test
@@ -56,8 +55,7 @@ public class MiniEnigmaTest {
 		assertEquals("D", enigma.encode("A"));
 	}
 
-	private String encode(String input) {
-		String val = input;
+	private int encode(int val) {
 		val = rotor.left(val);
 		val = reflector.reflect(val);
 		val = rotor.right(val);

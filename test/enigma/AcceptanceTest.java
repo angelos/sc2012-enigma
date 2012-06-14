@@ -11,12 +11,12 @@ public class AcceptanceTest {
 	
 	@Before
 	public void setup() {
-		Rotor r1 = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q");
-		r1.set("M");
-		Rotor r2 = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", "E");
-		r2.set("C");
-		Rotor r3 = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", "V");
-		r3.set("K");
+		Rotor r1 = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q');
+		r1.set('M');
+		Rotor r2 = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E');
+		r2.set('C');
+		Rotor r3 = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V');
+		r3.set('K');
 		Reflector reflector = new Reflector("ABCDEFGDIJKGMKMIEBFTCVVJAT");
 		enigma = new Enigma(reflector, r1, r2, r3);
 	}

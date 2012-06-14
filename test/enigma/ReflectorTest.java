@@ -9,7 +9,7 @@ public class ReflectorTest {
 	
 	@Test
 	public void reflectingDShouldMapToB() {
-		assertEquals(1, reflector.reflect(3));
+		assertEquals(1, reflector.encode(3));
 	}
 
 }

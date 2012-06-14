@@ -56,9 +56,9 @@ public class MiniEnigmaTest {
 	}
 
 	private int encode(int val) {
-		val = rotor.left(val);
-		val = reflector.reflect(val);
-		val = rotor.right(val);
+		val = rotor.left().encode(val);
+		val = reflector.encode(val);
+		val = rotor.right().encode(val);
 		return val;
 	}
 

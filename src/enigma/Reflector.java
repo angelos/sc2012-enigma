@@ -3,7 +3,7 @@ package enigma;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Reflector extends EncodingComponent {
+public class Reflector implements Encoder {
 	private final Map<Integer, Integer> mapping = new HashMap<Integer, Integer>();
 	
 	public Reflector(String encoder) {
@@ -14,12 +14,17 @@ public class Reflector extends EncodingComponent {
 		}
 	}
 
-	public int reflect(int input) {
-		return mapping.get(input);
+	@Override
+	public int encode(int in) {
+		return mapping.get(in);
+	}
+	
+	private int otherIndexOf(char character, String input, int notThisIndex) {
+		int match = input.indexOf(character);
+		if (match == notThisIndex) {
+			match = input.indexOf(character, notThisIndex + 1);
+		}
+		return match;
 	}
 
-	@Override
-	protected int componentSize() {
-		return mapping.size();
-	}
 }

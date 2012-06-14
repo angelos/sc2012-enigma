@@ -52,11 +52,11 @@ public class MediumEnigmaTest {
 
 	private int encode(int input) {
 		int val = input;
-		val = rotor2.left(val);
-		val = rotor1.left(val);
-		val = reflector.reflect(val);
-		val = rotor1.right(val);
-		val = rotor2.right(val);
+		val = rotor2.left().encode(val);
+		val = rotor1.left().encode(val);
+		val = reflector.encode(val);
+		val = rotor1.right().encode(val);
+		val = rotor2.right().encode(val);
 		return val;
 	}
 }

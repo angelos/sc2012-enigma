@@ -1,9 +1,11 @@
 package enigma;
 
+import static enigma.Alphabet.ordinal;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Rotor extends EncodingComponent {
+public class Rotor {
 	private final Map<Integer, Integer> left = new HashMap<Integer, Integer>();
 	private final Map<Integer, Integer> right = new HashMap<Integer, Integer>();
 	
@@ -18,14 +20,12 @@ public class Rotor extends EncodingComponent {
 		this.notchPosition = ordinal(notchPosition);
 	}
 	
-	public int left(int input) {
-		int shifted = inrange(input + shift);
-		return inrange(left.get(shifted) - shift);
+	public Encoder left() {
+		return new RotorEncoder(left);
 	}
-
-	public int right(int input) {
-		int shifted = inrange(input + shift);
-		return inrange(right.get(shifted) - shift);
+	
+	public Encoder right() {
+		return new RotorEncoder(right);
 	}
 	
 	public void shift() {
@@ -36,7 +36,6 @@ public class Rotor extends EncodingComponent {
 		shift = ordinal(letter);
 	}
 	
-	@Override
 	protected int componentSize() {
 		return left.size();
 	}
@@ -44,5 +43,26 @@ public class Rotor extends EncodingComponent {
 	public boolean notchInWindow() {
 		return shift == notchPosition;
 	}
+	
+	private int inrange(int input) {
+		int result = input % componentSize();
+		if (result < 0) {
+			result += componentSize();
+		}
+		return result;
+	}
 
+	private class RotorEncoder implements Encoder {
+		private final Map<Integer, Integer> encodings;
+
+		public RotorEncoder(Map<Integer, Integer> encodings) {
+			this.encodings = encodings;
+		}
+
+		@Override
+		public int encode(int in) {
+			int shifted = inrange(in + shift);
+			return inrange(encodings.get(shifted) - shift);
+		}
+	}
 }

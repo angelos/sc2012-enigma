@@ -1,6 +1,6 @@
 package enigma;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ public class RotorTest {
 	
 	@Before
 	public void setup() {
-		rotor = new Rotor("DCAB");
+		rotor = new Rotor("DCAB", "C");
 	}
 	
 	@Test
@@ -33,5 +33,23 @@ public class RotorTest {
 	public void afterShiftingGoingRightAShouldEncodeToC() {
 		rotor.shift();
 		assertEquals("C", rotor.right("A"));
+	}
+
+	@Test
+	public void afterSettingToBGoingRightAShouldEncodeToC() {
+		rotor.set("B");
+		assertEquals("C", rotor.right("A"));
+	}
+	
+	@Test
+	public void rotorShouldReportNotchInWindow() {
+		rotor.shift();
+		rotor.shift();
+		assertTrue(rotor.notchInWindow());
+	}
+
+	@Test
+	public void rotorShouldReportNotchNotInWindow() {
+		assertTrue(!rotor.notchInWindow());
 	}
 }

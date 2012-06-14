@@ -20,7 +20,11 @@ public abstract class EncodingComponent {
 	}
 	
 	protected int inrange(int input) {
-		return input % componentSize();
+		int result = input % componentSize();
+		if (result < 0) {
+			result += componentSize();
+		}
+		return result;
 	}
 	
 	protected abstract int componentSize();
